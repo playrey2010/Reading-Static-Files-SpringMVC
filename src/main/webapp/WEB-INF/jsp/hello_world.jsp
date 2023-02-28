@@ -14,6 +14,6 @@
 <h1>Hi there!</h1>
 <h2>${message}</h2>
 <p>If done correctly, you should see an image below</p>
-<img src="${pageContext.request.contextPath}/resources/css/pokemonWarning.png" alt="" width="400px">
+<img src="${pageContext.request.contextPath}/resources/images/pokemonWarning.png" alt="" width="400px">
 </body>
 </html>

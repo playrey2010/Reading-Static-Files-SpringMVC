@@ -1,61 +1,20 @@
 # Basic-Spring-MVC
 Spring MVC Demo based on Maven Web application archetype. <br>
-Manually configured the Spring Dispatcher Servlet in web.xml file, and the view resolver in the spring...-servlet.xml file. <br>
-Finally, configured the Controller in a custom HelloController java class.
-### web.xml
+Simple project where we configure a resources folder into our web app. 
 
-```
-<display-name>Spring MVC Application</display-name>
 
-    <!-- Step 1: Configure Spring MVC Dispatcher Servlet -->
-    <!-- Refer to our diagram on what the Front Controller does -->
-    <servlet>
-        <servlet-name>dispatcher</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring-mvc-demo-servlet.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <!-- Step 2: Set up URL mapping for Spring MVC Dispatcher Servlet -->
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-```
+### Project Structure
+We create the /resources/images folder where we placed our .png image.
+![img.png](img.png)
 
 ### spring-mvc-demo-servlet.xml
+We then map the folder in our config file.
 ```
-    <context:component-scan base-package="com.example"/>
-    <!-- Add support for conversion, formatting, and validation -->
-    <mvc:annotation-driven/>
-    <!-- Define the Spring MVC view resolver -->
-    <!-- In other words, where the page is located -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp" />
-    </bean>
-
+    <!-- Add mapping for resources folder -->
+    <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
 ```
-### HelloController.java
+### hello_world.jsp
+Now, we display the image using jsp expression language ${pageContext.request.contextPath) and the rest of the directory
 ```
-package com.example;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-
-@Controller
-public class HelloController {
-
-    @RequestMapping("/")
-    public String showPage(Model model){
-        model.addAttribute("message", "Oh yeah!");
-        return "hello_world";
-    }
-
-}
+<img src="${pageContext.request.contextPath}/resources/images/pokemonWarning.png" alt="" width="400px">
 ```
